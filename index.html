@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>TRC TECH | Master Hub</title>
+<!-- External Libraries -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<style>
+  :root { --accent: #f0c000; --glass: rgba(255, 255, 255, 0.05); --bg: #000; }
+  
+  * { margin:0; padding:0; box-sizing:border-box; scroll-behavior: smooth; font-family: 'Roboto', sans-serif; }
+  body { background: var(--bg); color: #fff; overflow-x: hidden; }
+  
+  /* 3D Canvas Layer */
+  #bg-canvas { position: fixed; top: 0; left: 0; z-index: -1; width: 100vw; height: 100vh; }
+
+  /* Header & Navigation */
+  header {
+    position: fixed; top: 0; width: 100%; z-index: 1000;
+    background: rgba(0,0,0,0.85); backdrop-filter: blur(15px);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 15px 25px; border-bottom: 2px solid var(--accent);
+  }
+  .logo { font-size: 1.5rem; color: var(--accent); font-weight: bold; letter-spacing: 1px; }
+  .clock-box { text-align: right; color: var(--accent); font-size: 0.8rem; font-family: monospace; }
+
+  /* Global Section Styling */
+  section { padding: 100px 20px; max-width: 1100px; margin: 0 auto; position: relative; }
+  h2 { font-size: 2.2rem; text-align: center; margin-bottom: 40px; text-transform: uppercase; letter-spacing: 3px; }
+  
+  /* Interactive Cards */
+  .card {
+    background: rgba(20, 20, 20, 0.9); border: 1px solid rgba(255,255,255,0.1);
+    padding: 30px; border-radius: 15px; margin-bottom: 20px;
+    backdrop-filter: blur(10px); transition: 0.3s;
+  }
+  .card:hover { border-color: var(--accent); box-shadow: 0 0 20px rgba(240, 192, 0, 0.2); }
+
+  /* Buttons */
+  .btn {
+    display: inline-block; background: var(--accent); color: #000;
+    padding: 14px 28px; border-radius: 5px; font-weight: bold;
+    text-decoration: none; cursor: pointer; border: none;
+    text-transform: uppercase; font-size: 0.85rem; transition: 0.3s;
+  }
+  .btn:hover { box-shadow: 0 0 15px var(--accent); transform: translateY(-2px); }
+  input, textarea { width: 100%; padding: 12px; margin: 10px 0; border-radius: 5px; border: 1px solid #333; background: #111; color: #fff; }
+
+  /* Quiz System */
+  .quiz-option { width: 100%; padding: 12px; margin: 8px 0; background: #222; border: 1px solid #444; color: #fff; cursor: pointer; text-align: left; border-radius: 8px; }
+  .quiz-option:hover { background: var(--accent); color: #000; font-weight: bold; }
+  #quiz-progress { height: 6px; background: var(--accent); width: 0%; transition: 0.4s; border-radius: 10px; }
+
+  /* Music Player */
+  #music-control { position: fixed; bottom: 20px; left: 20px; z-index: 1001; background: var(--accent); border-radius: 50%; width: 55px; height: 55px; cursor: pointer; font-size: 24px; border: none; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px var(--accent); }
+
+  /* Admin & Legal Overlays */
+  .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 2000; padding: 50px 20px; overflow-y: auto; }
+  .close-btn { position: fixed; top: 20px; right: 25px; color: var(--accent); font-size: 2.5rem; cursor: pointer; }
+
+  /* Pricing Grid */
+  .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+  
+  footer { text-align: center; padding: 60px 20px; border-top: 1px solid #222; font-size: 0.8rem; color: #666; }
+</style>
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+
+<!-- Background Music -->
+<audio id="bg-music" loop>
+  <source src="https://www.chosic.com/wp-content/uploads/2021/04/The-Grandvard-Orchestra.mp3" type="audio/mpeg">
+</audio>
+<button id="music-control" onclick="toggleMusic()">🎺</button>
+
+<header>
+  <div class="logo">TRC TECH</div>
+  <div class="clock-box" id="live-clock">ST-TIME: CALC...</div>
+</header>
+
+<!-- Hero / Signup -->
+<section id="hero" style="min-height:90vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
+  <h1 data-aos="zoom-out" style="font-size: clamp(2.5rem, 8vw, 4.5rem); margin-bottom:10px;">TRC TECH & ART</h1>
+  <p style="color:var(--accent); letter-spacing:8px; font-weight:bold; margin-bottom:40px;">ZAMBIA HUB</p>
+  
+  <div class="card" style="width:100%; max-width:400px;" data-aos="fade-up">
+    <h3>Join Elite Hub</h3>
+    <input type="text" id="user-name-input" placeholder="Your Full Name">
+    <button class="btn" style="width:100%;" onclick="joinHub()">Sign Up</button>
+  </div>
+</section>
+
+<!-- Updates Section -->
+<section id="updates">
+  <h2 data-aos="fade-up">Public Updates</h2>
+  <div class="card" id="updates-content" data-aos="fade-right">
+    <p>🔹 <i>Loading announcements...</i></p>
+  </div>
+</section>
+
+<!-- Currency Section -->
+<section id="currency">
+  <h2 data-aos="fade-up">Global Exchange</h2>
+  <div class="card" style="text-align:center;" data-aos="fade-left">
+    <p>Estimated Kwacha Value</p>
+    <div id="zmw-rate" style="font-size:2.5rem; color:var(--accent); font-weight:900; margin:15px 0;">1 USD = ... ZMW</div>
+    <div style="display:flex; justify-content:center; gap:10px; margin-top:15px;">
+        <a href="https://www.xe.com/currencyconverter/convert/?Amount=1&From=USD&To=ZMW" target="_blank" class="btn" style="background:#222; color:#fff; font-size:0.7rem;">XE.com</a>
+        <a href="https://wise.com/" target="_blank" class="btn" style="background:#222; color:#fff; font-size:0.7rem;">Wise</a>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section id="pricing">
+  <h2 data-aos="fade-down">Pricing & Services</h2>
+  <div class="pricing-grid">
+    <div class="card" data-aos="flip-left">
+      <h3>K0 Free Bot</h3>
+      <p>Basic automation features.</p>
+      <a href="https://wa.me/260763926311?text=Hello%2C%20I%20want%20the%20K0%20Free%20Bot" class="btn" style="margin-top:15px; width:100%;" onclick="clickOrder()">Get Access</a>
+    </div>
+    <div class="card" style="border-color:var(--accent);" data-aos="flip-left" data-aos-delay="100">
+      <h3>K10 Pairing</h3>
+      <p>Connect to the elite bots.</p>
+      <a href="https://wa.me/260763926311?text=Hello%2C%20I%20want%20the%20K10%20Pairing" class="btn" style="margin-top:15px; width:100%;" onclick="clickOrder()">Pair Now</a>
+    </div>
+    <div class="card" data-aos="flip-left" data-aos-delay="200">
+      <h3>K15 Tutorial</h3>
+      <p>Create your own bot.</p>
+      <a href="https://wa.me/260763926311?text=Hello%2C%20I%20want%20the%20K15%20Bot%20Tutorial" class="btn" style="margin-top:15px; width:100%;" onclick="clickOrder()">Learn Now</a>
+    </div>
+    <div class="card" data-aos="flip-left" data-aos-delay="300">
+      <h3>K55 Website</h3>
+      <p>Digital company setup.</p>
+      <a href="https://wa.me/260763926311?text=Hello%2C%20I%20want%20a%20K55%20Website" class="btn" style="margin-top:15px; width:100%;" onclick="clickOrder()">Build Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- Robo Trivia Quiz -->
+<section id="quiz">
+  <h2 data-aos="fade-up">Robo-Trivia (15 Levels)</h2>
+  <div class="card">
+    <div style="width:100%; height:8px; background:#111; margin-bottom:20px; border-radius:10px;">
+      <div id="quiz-progress"></div>
+    </div>
+    <div id="quiz-ui">
+      <p id="q-text" style="font-size:1.3rem; margin-bottom:20px; min-height:60px;"></p>
+      <div id="q-options"></div>
+    </div>
+    <div id="quiz-final" style="display:none; text-align:center;">
+      <h2 id="final-score"></h2>
+      <button class="btn" onclick="startQuiz()">Restart Challenge</button>
+    </div>
+  </div>
+</section>
+
+<!-- Nav Hooks & Admin -->
+<div style="text-align:center; padding: 40px;">
+    <button onclick="openAdmin()" style="background:none; border:none; color:#444; cursor:pointer;">Admin Dashboard</button> |
+    <button onclick="openOverlay('privacy')" style="background:none; border:none; color:#444; cursor:pointer;">Privacy</button> |
+    <button onclick="openOverlay('terms')" style="background:none; border:none; color:#444; cursor:pointer;">Terms</button>
+</div>
+
+<!-- Overlays -->
+<div id="admin-panel" class="overlay">
+  <span class="close-btn" onclick="closeAll()">&times;</span>
+  <h2>Admin Console</h2>
+  <div class="card">
+    <h3>Live Updates Editor</h3>
+    <textarea id="update-editor" rows="5"></textarea>
+    <button class="btn" onclick="saveAdminUpdates()">Apply Changes</button>
+  </div>
+  <div class="card">
+    <h3>Website Analytics</h3>
+    <p>Site Status: <span style="color:lime">ONLINE</span></p>
+    <p>Total Orders Clicked: <span id="stat-clicks" style="color:var(--accent)">0</span></p>
+    <p>Registered Hub Members:</p>
+    <div id="stat-users" style="margin-top:10px; font-size:0.9rem; color:var(--accent);"></div>
+  </div>
+</div>
+
+<div id="legal-panel" class="overlay">
+  <span class="close-btn" onclick="closeAll()">&times;</span>
+  <h2 id="legal-title"></h2>
+  <div class="card" id="legal-body" style="line-height:1.7;"></div>
+</div>
+
+<footer>
+    &copy; 2026 TRC TECH SOLUTIONS | Innovating from Zambia to the World
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 800, once: true });
+
+  // --- Hub Data Logic ---
+  let db = {
+    clicks: localStorage.getItem('trc_clicks') || 0,
+    users: JSON.parse(localStorage.getItem('trc_users')) || [],
+    updates: localStorage.getItem('trc_updates') || "🔹 Welcome! The TRC Hub is now officially live for the new year.\n🔹 Contact admin for the new March 3rd event details."
+  };
+
+  // --- Clock & Location ---
+  function runClock() {
+    const now = new Date();
+    const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    document.getElementById('live-clock').innerHTML = `${now.toLocaleTimeString()}<br>${zone}`;
+    
+    // Currency Detection Approximation
+    const kwachaRate = { "Africa/Lusaka": 26.5, "Africa/Johannesburg": 1.45, "default": 26.55 };
+    const rate = kwachaRate[zone] || kwachaRate['default'];
+    const curCode = zone.includes("Lusaka") ? "ZMW" : zone.includes("Johannesburg") ? "ZAR" : "USD";
+    document.getElementById('zmw-rate').innerText = `1 ${curCode} = ${rate} ZMW`;
+  }
+  setInterval(runClock, 1000);
+
+  // --- Admin Logic ---
+  function openAdmin() {
+    if(prompt("Enter Admin Pass:") === "TRCTECH 321") {
+      document.getElementById('admin-panel').style.display = 'block';
+      document.getElementById('update-editor').value = db.updates;
+      document.getElementById('stat-clicks').innerText = db.clicks;
+      document.getElementById('stat-users').innerHTML = db.users.map(u => u.name).join(", ");
+    } else {
+      alert("Unauthorized!");
+    }
+  }
+
+  function saveAdminUpdates() {
+    db.updates = document.getElementById('update-editor').value;
+    localStorage.setItem('trc_updates', db.updates);
+    renderUpdates();
+    alert("Live updates updated!");
+  }
+
+  function renderUpdates() {
+    document.getElementById('updates-content').innerHTML = db.updates.replace(/\n/g, '<br>');
+  }
+
+  function joinHub() {
+    let n = document.getElementById('user-name-input').value;
+    if(n) {
+      db.users.push({name: n, date: new Date()});
+      localStorage.setItem('trc_users', JSON.stringify(db.users));
+      alert("Welcome to the Hub, " + n);
+      document.getElementById('user-name-input').value = "";
+    }
+  }
+
+  function clickOrder() {
+    db.clicks++;
+    localStorage.setItem('trc_clicks', db.clicks);
+  }
+
+  // --- Quiz Logic ---
+  const qBank = [
+    {q: "Which bot plan is free?", o: ["K0", "K10", "K15"], c: 0},
+    {q: "TRC TECH is located in which country?", o: ["South Africa", "Zambia", "Kenya"], c: 1},
+    {q: "What is 1 USD worth in Kwacha approx?", o: ["K5", "K15", "K26+"], c: 2},
+    {q: "Which bot tutorial costs K15?", o: ["Create Own Bot", "Free Bot", "Spam Bot"], c: 0},
+    {q: "What programming language is 'Node'?", o: ["JavaScript", "Python", "PHP"], c: 0},
+    {q: "Is March 3rd MR TRCs Birthday?", o: ["No", "Yes", "Maybe"], c: 1},
+    {q: "Website plans start at?", o: ["K10", "K55+", "K100"], c: 1},
+    {q: "What is robotic hardware?", o: ["Softwares", "Physical parts", "Clouds"], c: 1},
+    {q: "What is AI?", o: ["Artificial Intel", "Apple Inc", "Auto Inc"], c: 0},
+    {q: "Does TRC TECH help register companies?", o: ["Yes", "No", "Only bots"], c: 0},
+    {q: "Best app for TRCBOT?", o: ["Viber", "WhatsApp", "Snapchat"], c: 1},
+    {q: "What is a TRC pairing?", o: ["Connecting bots", "Cooking", "Deleting"], c: 0},
+    {q: "What is the admin password?", o: ["000", "321", "123"], c: 1},
+    {q: "How many questions are in this quiz?", o: ["5", "10", "15"], c: 2},
+    {q: "TRC TECH stands for?", o: ["Technology", "Technique", "Teaching"], c: 0}
+  ];
+  let curQ = 0, score = 0;
+  function startQuiz() {
+    curQ = 0; score = 0;
+    document.getElementById('quiz-ui').style.display='block';
+    document.getElementById('quiz-final').style.display='none';
+    loadQ();
+  }
+  function loadQ() {
+    let q = qBank[curQ];
+    document.getElementById('q-text').innerText = `${curQ+1}. ${q.q}`;
+    let out = "";
+    q.o.forEach((opt, i) => out += `<button class="quiz-option" onclick="ans(${i})">${opt}</button>`);
+    document.getElementById('q-options').innerHTML = out;
+    document.getElementById('quiz-progress').style.width = `${((curQ+1)/15)*100}%`;
+  }
+  function ans(i) {
+    if(i === qBank[curQ].c) score++;
+    curQ++;
+    if(curQ < 15) loadQ();
+    else {
+      document.getElementById('quiz-ui').style.display='none';
+      document.getElementById('quiz-final').style.display='block';
+      document.getElementById('final-score').innerText = `Score: ${score}/15`;
+    }
+  }
+
+  // --- 3D Starfield ---
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg-canvas'), antialias: false });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  const geo = new THREE.BufferGeometry();
+  const pts = new Float32Array(2000 * 3);
+  for(let i=0; i<6000; i++) pts[i] = (Math.random() - 0.5) * 10;
+  geo.setAttribute('position', new THREE.BufferAttribute(pts, 3));
+  const starMesh = new THREE.Points(geo, new THREE.PointsMaterial({color: 0xf0c000, size: 0.01}));
+  scene.add(starMesh);
+  camera.position.z = 2;
+  function animate() { requestAnimationFrame(animate); starMesh.rotation.y += 0.0006; renderer.render(scene, camera); }
+  animate();
+
+  // --- UI Helpers ---
+  function toggleMusic() { 
+    const m = document.getElementById('bg-music');
+    m.paused ? (m.play(), document.getElementById('music-control').innerText="🔊") : (m.pause(), document.getElementById('music-control').innerText="🎺");
+  }
+  function openOverlay(t) {
+    document.getElementById('legal-panel').style.display = 'block';
+    document.getElementById('legal-title').innerText = t === 'privacy' ? 'Privacy Policy' : 'Terms & Conditions';
+    document.getElementById('legal-body').innerText = "TRC TECH values security. Data is stored locally for session continuity. All sales via WhatsApp are final.";
+  }
+  function closeAll() { document.querySelectorAll('.overlay').forEach(e => e.style.display='none'); }
+
+  renderUpdates();
+  startQuiz();
+  runClock();
+</script>
+</body>
+</html>
