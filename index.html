@@ -12,12 +12,101 @@
       box-sizing: border-box;
     }
 
+    :root {
+      /* Default Theme: Dark Blue */
+      --primary-color: #0ea5e9;
+      --secondary-color: #38bdf8;
+      --accent-color: #a78bfa;
+      --bg-dark: #0b1220;
+      --bg-darker: #020617;
+      --bg-card: #111827;
+      --bg-card-light: #1a1f3a;
+      --border-color: #1f2937;
+      --text-primary: #e5e7eb;
+      --text-secondary: #94a3b8;
+      --success-color: #86efac;
+      --warning-color: #fbbf24;
+    }
+
+    /* Theme: Neon Purple */
+    body.theme-purple {
+      --primary-color: #a78bfa;
+      --secondary-color: #c4b5fd;
+      --accent-color: #e9d5ff;
+      --bg-dark: #1a1025;
+      --bg-darker: #0f0620;
+    }
+
+    /* Theme: Cyber Green */
+    body.theme-green {
+      --primary-color: #10b981;
+      --secondary-color: #34d399;
+      --accent-color: #6ee7b7;
+      --bg-dark: #0a1f1a;
+      --bg-darker: #051215;
+    }
+
+    /* Theme: Neon Pink */
+    body.theme-pink {
+      --primary-color: #ec4899;
+      --secondary-color: #f472b6;
+      --accent-color: #fbcfe8;
+      --bg-dark: #1f0a1a;
+      --bg-darker: #0f0510;
+    }
+
+    /* Theme: Vibrant Orange */
+    body.theme-orange {
+      --primary-color: #f97316;
+      --secondary-color: #fb923c;
+      --accent-color: #fed7aa;
+      --bg-dark: #1f0f05;
+      --bg-darker: #0f0502;
+    }
+
+    /* Theme: Electric Yellow */
+    body.theme-yellow {
+      --primary-color: #eab308;
+      --secondary-color: #facc15;
+      --accent-color: #fef08a;
+      --bg-dark: #1a1505;
+      --bg-darker: #0f0a02;
+    }
+
+    /* Theme: Cool Cyan */
+    body.theme-cyan {
+      --primary-color: #06b6d4;
+      --secondary-color: #22d3ee;
+      --accent-color: #cffafe;
+      --bg-dark: #051a1e;
+      --bg-darker: #020f12;
+    }
+
+    /* Theme: Red Danger */
+    body.theme-red {
+      --primary-color: #ef4444;
+      --secondary-color: #f87171;
+      --accent-color: #fca5a5;
+      --bg-dark: #1a0a0a;
+      --bg-darker: #0f0505;
+    }
+
+    /* Theme: Indigo Deep */
+    body.theme-indigo {
+      --primary-color: #6366f1;
+      --secondary-color: #818cf8;
+      --accent-color: #c7d2fe;
+      --bg-dark: #0f0f2e;
+      --bg-darker: #060614;
+    }
+
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #0b1220;
-      color: #e5e7eb;
+      background: var(--bg-dark);
+      color: var(--text-primary);
       -webkit-tap-highlight-color: transparent;
       overflow-x: hidden;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
     /* 3D Background Canvas */
@@ -43,16 +132,16 @@
       top: 0;
       z-index: 1000;
       transition: 0.3s;
-      border-bottom: 1px solid #1f2937;
+      border-bottom: 1px solid var(--border-color);
     }
 
     .navbar.scrolled {
-      background: #020617;
+      background: var(--bg-darker);
       box-shadow: 0 0 15px rgba(14, 165, 233, 0.3);
     }
 
     .logo {
-      color: #0ea5e9;
+      color: var(--primary-color);
       font-size: 22px;
       font-weight: bold;
       text-decoration: none;
@@ -60,7 +149,7 @@
     }
 
     .logo:hover {
-      text-shadow: 0 0 10px #0ea5e9;
+      text-shadow: 0 0 10px var(--primary-color);
     }
 
     .nav-links {
@@ -82,7 +171,7 @@
       position: absolute;
       width: 0%;
       height: 2px;
-      background: #0ea5e9;
+      background: var(--primary-color);
       left: 0;
       bottom: -5px;
       transition: 0.3s;
@@ -95,6 +184,7 @@
     .nav-buttons {
       display: flex;
       gap: 10px;
+      align-items: center;
     }
 
     .btn {
@@ -107,14 +197,14 @@
     }
 
     .login-btn {
-      border: 1px solid #0ea5e9;
-      color: #0ea5e9;
+      border: 1px solid var(--primary-color);
+      color: var(--primary-color);
     }
 
     .login-btn:hover {
-      background: #0ea5e9;
+      background: var(--primary-color);
       color: #000;
-      box-shadow: 0 0 10px #0ea5e9;
+      box-shadow: 0 0 10px var(--primary-color);
     }
 
     .whatsapp-btn {
@@ -128,6 +218,22 @@
       box-shadow: 0 0 10px #25D366;
     }
 
+    .settings-btn {
+      background: none;
+      border: 1px solid var(--primary-color);
+      color: var(--primary-color);
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    .settings-btn:hover {
+      background: var(--primary-color);
+      color: #000;
+    }
+
     .menu-toggle {
       display: none;
       font-size: 24px;
@@ -137,10 +243,185 @@
       border: none;
     }
 
+    /* SETTINGS PANEL */
+    .settings-panel {
+      position: fixed;
+      right: -400px;
+      top: 0;
+      width: 380px;
+      height: 100vh;
+      background: var(--bg-card);
+      border-left: 2px solid var(--primary-color);
+      padding: 30px 20px;
+      z-index: 2000;
+      overflow-y: auto;
+      transition: right 0.3s ease;
+      box-shadow: -5px 0 20px rgba(0,0,0,0.3);
+    }
+
+    .settings-panel.active {
+      right: 0;
+    }
+
+    .settings-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .settings-header h3 {
+      color: var(--primary-color);
+      font-size: 20px;
+    }
+
+    .close-settings {
+      background: none;
+      border: none;
+      color: var(--primary-color);
+      font-size: 24px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .close-settings:hover {
+      transform: rotate(90deg);
+    }
+
+    .settings-group {
+      margin-bottom: 25px;
+    }
+
+    .settings-group label {
+      display: block;
+      color: var(--text-secondary);
+      font-size: 13px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .theme-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .theme-option {
+      padding: 12px;
+      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+      font-size: 12px;
+      transition: 0.3s;
+      background: var(--bg-darker);
+      color: var(--text-secondary);
+    }
+
+    .theme-option:hover {
+      border-color: var(--primary-color);
+      background: rgba(14, 165, 233, 0.1);
+    }
+
+    .theme-option.active {
+      border-color: var(--primary-color);
+      background: var(--primary-color);
+      color: #000;
+      font-weight: 600;
+    }
+
+    .settings-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1999;
+    }
+
+    .settings-overlay.active {
+      display: block;
+    }
+
+    /* ADMIN STATUS UPDATE */
+    .admin-status-panel {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--bg-card);
+      border: 2px solid var(--primary-color);
+      border-radius: 10px;
+      padding: 15px;
+      z-index: 1500;
+      width: 300px;
+      box-shadow: 0 0 20px rgba(14, 165, 233, 0.2);
+    }
+
+    .admin-status-panel.active {
+      display: block;
+    }
+
+    .admin-status-header {
+      color: var(--primary-color);
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .admin-status-input {
+      width: 100%;
+      padding: 8px;
+      background: var(--bg-darker);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      font-size: 12px;
+    }
+
+    .admin-status-input::placeholder {
+      color: var(--text-secondary);
+    }
+
+    .admin-button {
+      width: 100%;
+      padding: 8px;
+      background: var(--primary-color);
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 12px;
+      transition: 0.3s;
+      margin-top: 8px;
+    }
+
+    .admin-button:hover {
+      opacity: 0.9;
+    }
+
+    .admin-password-input {
+      width: 100%;
+      padding: 8px;
+      background: var(--bg-darker);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      font-size: 12px;
+    }
+
     /* HERO SECTION */
     .hero {
       height: 100vh;
-      background: linear-gradient(135deg, #020617, #0f172a);
+      background: linear-gradient(135deg, var(--bg-darker), #0f172a);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -152,16 +433,16 @@
 
     .hero-content h1 {
       font-size: 3.5rem;
-      color: #38bdf8;
+      color: var(--secondary-color);
       letter-spacing: 2px;
-      text-shadow: 0 0 20px #38bdf8, 0 0 40px #0ea5e9;
+      text-shadow: 0 0 20px var(--secondary-color), 0 0 40px var(--primary-color);
       margin-bottom: 20px;
     }
 
     .hero-content h2 {
       font-size: 1.8rem;
       margin-bottom: 15px;
-      color: #a78bfa;
+      color: var(--accent-color);
     }
 
     .hero-content p {
@@ -180,39 +461,47 @@
     }
 
     .primary {
-      background: #38bdf8;
+      background: var(--secondary-color);
       color: #020617;
       padding: 12px 25px;
       font-weight: 600;
+      border-radius: 6px;
+      text-decoration: none;
+      display: inline-block;
+      transition: 0.3s;
     }
 
     .primary:hover {
-      background: #0ea5e9;
-      box-shadow: 0 0 20px #0ea5e9;
+      background: var(--primary-color);
+      box-shadow: 0 0 20px var(--primary-color);
       transform: translateY(-2px);
     }
 
     .secondary {
-      border: 2px solid #38bdf8;
-      color: #38bdf8;
+      border: 2px solid var(--secondary-color);
+      color: var(--secondary-color);
       padding: 10px 23px;
       font-weight: 600;
+      border-radius: 6px;
+      text-decoration: none;
+      display: inline-block;
+      transition: 0.3s;
     }
 
     .secondary:hover {
-      background: #38bdf8;
+      background: var(--secondary-color);
       color: #020617;
-      box-shadow: 0 0 20px #38bdf8;
+      box-shadow: 0 0 20px var(--secondary-color);
       transform: translateY(-2px);
     }
 
     /* SECTIONS */
     h2 {
-      color: #94a3b8;
+      color: var(--text-secondary);
       margin: 40px 20px 20px 20px;
       font-size: 28px;
       font-weight: 600;
-      border-left: 4px solid #0ea5e9;
+      border-left: 4px solid var(--primary-color);
       padding-left: 15px;
     }
 
@@ -226,15 +515,15 @@
     }
 
     .card {
-      background: linear-gradient(135deg, #111827 0%, #1a1f3a 100%);
-      border: 1px solid #1f2937;
+      background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-card-light) 100%);
+      border: 1px solid var(--border-color);
       padding: 22px;
       border-radius: 12px;
       transition: 0.3s ease;
     }
 
     .card:hover {
-      border-color: #0ea5e9;
+      border-color: var(--primary-color);
       box-shadow: 0 0 20px rgba(14, 165, 233, 0.2);
       transform: translateY(-5px);
     }
@@ -247,12 +536,12 @@
 
     .card p {
       font-size: 14px;
-      color: #94a3b8;
+      color: var(--text-secondary);
       margin: 6px 0;
     }
 
     .card strong {
-      color: #38bdf8;
+      color: var(--secondary-color);
       font-weight: 600;
     }
 
@@ -268,7 +557,7 @@
       padding: 8px 12px;
       border-radius: 6px;
       font-size: 12px;
-      background: #1f2937;
+      background: var(--border-color);
       color: #cbd5e1;
       border: 1px solid #2d3748;
       transition: 0.2s;
@@ -276,9 +565,9 @@
     }
 
     .buttons a:hover {
-      background: #0ea5e9;
+      background: var(--primary-color);
       color: #fff;
-      border-color: #0ea5e9;
+      border-color: var(--primary-color);
     }
 
     /* HEADER INFO */
@@ -288,9 +577,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid #1f2937;
+      border-bottom: 1px solid var(--border-color);
       font-size: 14px;
-      color: #94a3b8;
+      color: var(--text-secondary);
     }
 
     .status {
@@ -310,6 +599,20 @@
       color: #fbbf24;
     }
 
+    .live-status {
+      background: rgba(239, 68, 68, 0.2);
+      color: #fca5a5;
+      border: 1px solid #ef4444;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      max-width: 250px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
     /* FOOTER */
     footer {
       background: #0f172a;
@@ -317,12 +620,12 @@
       padding: 30px;
       font-size: 12px;
       color: #64748b;
-      border-top: 1px solid #1f2937;
+      border-top: 1px solid var(--border-color);
       margin-top: 40px;
     }
 
     footer .card {
-      background: #111827;
+      background: var(--bg-card);
       display: inline-block;
       margin: 10px auto;
     }
@@ -332,8 +635,8 @@
       max-width: 400px;
       margin: 50px auto;
       padding: 30px;
-      background: #111827;
-      border: 1px solid #1f2937;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
       border-radius: 12px;
       text-align: center;
     }
@@ -349,7 +652,7 @@
       padding: 10px;
       margin: 10px 0;
       background: #0f172a;
-      border: 1px solid #1f2937;
+      border: 1px solid var(--border-color);
       border-radius: 6px;
       color: #fff;
       font-size: 14px;
@@ -358,7 +661,7 @@
     .auth-container button {
       padding: 10px 20px;
       margin: 8px;
-      background: #0ea5e9;
+      background: var(--primary-color);
       color: #000;
       border: none;
       border-radius: 6px;
@@ -368,16 +671,16 @@
     }
 
     .auth-container button:hover {
-      background: #38bdf8;
+      background: var(--secondary-color);
     }
 
     .protected-content {
       display: none;
       padding: 30px;
-      background: #111827;
+      background: var(--bg-card);
       margin: 20px;
       border-radius: 12px;
-      border: 1px solid #0ea5e9;
+      border: 1px solid var(--primary-color);
     }
 
     .protected-content h2 {
@@ -396,21 +699,21 @@
     }
 
     .stat-card {
-      background: linear-gradient(135deg, #1f2937, #111827);
+      background: linear-gradient(135deg, var(--border-color), var(--bg-card));
       padding: 20px;
       border-radius: 10px;
-      border: 1px solid #1f2937;
+      border: 1px solid var(--border-color);
       text-align: center;
     }
 
     .stat-card h3 {
-      color: #0ea5e9;
+      color: var(--primary-color);
       font-size: 28px;
       margin-bottom: 8px;
     }
 
     .stat-card p {
-      color: #94a3b8;
+      color: var(--text-secondary);
       font-size: 14px;
     }
 
@@ -425,10 +728,10 @@
     }
 
     .feature-box {
-      background: #111827;
+      background: var(--bg-card);
       padding: 20px;
       border-radius: 10px;
-      border-left: 4px solid #0ea5e9;
+      border-left: 4px solid var(--primary-color);
       transition: 0.3s;
     }
 
@@ -437,14 +740,14 @@
     }
 
     .feature-box h4 {
-      color: #38bdf8;
+      color: var(--secondary-color);
       margin-bottom: 10px;
     }
 
     /* TESTIMONIALS */
     .testimonial {
-      background: #111827;
-      border-left: 4px solid #0ea5e9;
+      background: var(--bg-card);
+      border-left: 4px solid var(--primary-color);
       padding: 20px;
       margin: 15px auto;
       max-width: 600px;
@@ -452,7 +755,7 @@
     }
 
     .testimonial-author {
-      color: #0ea5e9;
+      color: var(--primary-color);
       font-weight: 600;
       margin-top: 10px;
     }
@@ -464,7 +767,7 @@
         top: 60px;
         left: 0;
         width: 100%;
-        background: #020617;
+        background: var(--bg-darker);
         flex-direction: column;
         align-items: center;
         display: none;
@@ -506,6 +809,11 @@
         font-size: 12px;
         padding: 10px 15px;
       }
+
+      .settings-panel {
+        width: 280px;
+        right: -280px;
+      }
     }
 
     /* HIDE/SHOW SECTIONS */
@@ -529,6 +837,46 @@
 <body>
   <canvas id="bg-canvas"></canvas>
 
+  <!-- Settings Overlay -->
+  <div class="settings-overlay" id="settingsOverlay"></div>
+
+  <!-- Settings Panel -->
+  <div class="settings-panel" id="settingsPanel">
+    <div class="settings-header">
+      <h3>⚙️ Settings</h3>
+      <button class="close-settings" onclick="toggleSettings()">✕</button>
+    </div>
+
+    <div class="settings-group">
+      <label>🎨 Select Theme</label>
+      <div class="theme-grid">
+        <div class="theme-option active" data-theme="default" onclick="changeTheme('default')">Dark Blue</div>
+        <div class="theme-option" data-theme="purple" onclick="changeTheme('purple')">Purple</div>
+        <div class="theme-option" data-theme="green" onclick="changeTheme('green')">Cyber Green</div>
+        <div class="theme-option" data-theme="pink" onclick="changeTheme('pink')">Neon Pink</div>
+        <div class="theme-option" data-theme="orange" onclick="changeTheme('orange')">Orange</div>
+        <div class="theme-option" data-theme="yellow" onclick="changeTheme('yellow')">Yellow</div>
+        <div class="theme-option" data-theme="cyan" onclick="changeTheme('cyan')">Cyan</div>
+        <div class="theme-option" data-theme="red" onclick="changeTheme('red')">Red</div>
+        <div class="theme-option" data-theme="indigo" onclick="changeTheme('indigo')">Indigo</div>
+      </div>
+    </div>
+
+    <div class="settings-group">
+      <label>💾 Theme Saved</label>
+      <p style="color: var(--text-secondary); font-size: 12px; margin-top: 5px;">Your theme preference is automatically saved to your browser.</p>
+    </div>
+  </div>
+
+  <!-- Admin Status Update Panel -->
+  <div class="admin-status-panel" id="adminStatusPanel">
+    <div class="admin-status-header">🔐 ADMIN LIVE STATUS UPDATE</div>
+    <input type="password" class="admin-password-input" id="adminPassword" placeholder="Admin Password">
+    <input type="text" class="admin-status-input" id="statusUpdate" placeholder="Update status message...">
+    <button class="admin-button" onclick="submitAdminStatus()">Post Status</button>
+    <div id="adminMessage" style="color: var(--success-color); font-size: 11px; margin-top: 8px; text-align: center;"></div>
+  </div>
+
   <!-- NAVBAR -->
   <nav class="navbar" id="navbar">
     <a href="#home" class="logo" onclick="navigateTo('home'); return false;">TRC TECH</a>
@@ -548,6 +896,7 @@
     </ul>
 
     <div class="nav-buttons">
+      <button class="settings-btn" onclick="toggleSettings()" title="Settings">⚙️</button>
       <a href="#login" onclick="navigateTo('login'); return false;" class="btn login-btn">Login</a>
       <a href="https://wa.me/260763926311" class="btn whatsapp-btn" target="_blank">WhatsApp</a>
     </div>
@@ -559,7 +908,7 @@
   <header>
     <div>TRC FIX & TRC TECH</div>
     <div id="clock">Loading...</div>
-    <div id="status" class="status online">ONLINE</div>
+    <div id="liveStatus" class="status online">ONLINE</div>
   </header>
 
   <!-- HOME PAGE -->
@@ -998,51 +1347,18 @@
     <div class="container">
       <div class="card">
         <h3>Getting Started with WhatsApp Automation</h3>
-        <p>A beginner's guide to automating your WhatsApp business messages and customer service.</p>
-        <p style="color: #64748b; font-size: 12px;">Published: 2026-05-20</p>
-        <div class="buttons">
-          <a href="#" onclick="alert('Full article coming soon!'); return false;">Read More</a>
-        </div>
+        <p>Learn how to set up your first bot and automate your business communication...</p>
+        <p><strong>Posted: March 2024</strong></p>
       </div>
       <div class="card">
-        <h3>Top 5 Tech Trends in 2026</h3>
-        <p>Discover the latest technology trends that are shaping the digital landscape.</p>
-        <p style="color: #64748b; font-size: 12px;">Published: 2026-05-18</p>
-        <div class="buttons">
-          <a href="#" onclick="alert('Full article coming soon!'); return false;">Read More</a>
-        </div>
-      </div>
-      <div class="card">
-        <h3>How AI is Revolutionizing Customer Service</h3>
-        <p>Learn how artificial intelligence is transforming the way businesses interact with customers.</p>
-        <p style="color: #64748b; font-size: 12px;">Published: 2026-05-15</p>
-        <div class="buttons">
-          <a href="#" onclick="alert('Full article coming soon!'); return false;">Read More</a>
-        </div>
+        <h3>10 Ways AI Can Transform Your Business</h3>
+        <p>Discover how artificial intelligence is revolutionizing business operations...</p>
+        <p><strong>Posted: March 2024</strong></p>
       </div>
       <div class="card">
         <h3>Cybersecurity Tips for Small Businesses</h3>
-        <p>Essential security practices to protect your business from online threats.</p>
-        <p style="color: #64748b; font-size: 12px;">Published: 2026-05-12</p>
-        <div class="buttons">
-          <a href="#" onclick="alert('Full article coming soon!'); return false;">Read More</a>
-        </div>
-      </div>
-      <div class="card">
-        <h3>Website Design Best Practices</h3>
-        <p>Create stunning websites that convert visitors into customers.</p>
-        <p style="color: #64748b; font-size: 12px;">Published: 2026-05-10</p>
-        <div class="buttons">
-          <a href="#" onclick="alert('Full article coming soon!'); return false;">Read More</a>
-        </div>
-      </div>
-      <div class="card">
-        <h3>Mobile App Development Guide</h3>
-        <p>Everything you need to know about developing successful mobile applications.</p>
-        <p style="color: #64748b; font-size: 12px;">Published: 2026-05-08</p>
-        <div class="buttons">
-          <a href="#" onclick="alert('Full article coming soon!'); return false;">Read More</a>
-        </div>
+        <p>Protect your business from cyber threats with these essential security tips...</p>
+        <p><strong>Posted: March 2024</strong></p>
       </div>
     </div>
   </section>
@@ -1050,299 +1366,206 @@
   <!-- CONTACT PAGE -->
   <section class="page-content" id="contact-page">
     <h2>📞 CONTACT US</h2>
-    <div class="container">
-      <div class="card">
-        <h3>📱 WhatsApp</h3>
-        <p>Quick responses and direct communication</p>
-        <p><strong>+260 763 926 311</strong></p>
-        <div class="buttons">
-          <a href="https://wa.me/260763926311" target="_blank">Message Now</a>
-        </div>
-      </div>
-      <div class="card">
-        <h3>📧 Email</h3>
-        <p>Detailed inquiries and formal communication</p>
-        <p><strong>trcesfix@gmail.com</strong></p>
-        <div class="buttons">
-          <a href="mailto:trcesfix@gmail.com">Send Email</a>
-        </div>
-      </div>
-      <div class="card">
-        <h3>💬 SMS</h3>
-        <p>Text-based quick support</p>
-        <p><strong>+260 763 926 311</strong></p>
-        <div class="buttons">
-          <a href="sms:260763926311">Send SMS</a>
-        </div>
-      </div>
-      <div class="card">
-        <h3>🐞 Report a Bug</h3>
-        <p>Found an issue? Report it instantly</p>
-        <div class="buttons">
-          <a href="https://wa.me/260763926311?text=Hello%20TRC%20TECH%2C%20I%20found%20a%20bug%20on%20your%20system.%0A%0AProblem%3A%20(write%20here)%0A%0APage%3A%20(write%20page%20name)" target="_blank">WhatsApp</a>
-          <a href="mailto:trcesfix@gmail.com?subject=Bug%20Report&body=Hello%20TRC%20TECH,%20I%20found%20a%20bug:%0A%0AProblem:%0APage:" target="_blank">Gmail</a>
-        </div>
-      </div>
-      <div class="card">
-        <h3>💡 Suggestions</h3>
-        <p>Help us improve with your ideas</p>
-        <div class="buttons">
-          <a href="mailto:trcesfix@gmail.com?subject=Suggestion&body=Hello%20TRC%20TECH,%0AI%20have%20a%20suggestion:%0A%0A" target="_blank">Gmail</a>
-          <a href="https://wa.me/260763926311?text=Hello%20TRC%20TECH,%20I%20have%20a%20suggestion" target="_blank">WhatsApp</a>
-        </div>
-      </div>
-      <div class="card">
-        <h3>🌍 Social Media</h3>
-        <p>Connect with us on social platforms</p>
-        <div class="buttons">
-          <a href="https://tiktok.com/@trctech" target="_blank">TikTok</a>
-          <a href="https://youtube.com/@trctech" target="_blank">YouTube</a>
-          <a href="https://facebook.com/trctech" target="_blank">Facebook</a>
-        </div>
-      </div>
+    <div class="auth-container">
+      <h3 style="color: var(--text-primary); margin-bottom: 20px;">Get in Touch</h3>
+      <p style="color: var(--text-secondary); margin-bottom: 20px;">📱 WhatsApp: +260 763 926 311</p>
+      <p style="color: var(--text-secondary); margin-bottom: 20px;">📧 Email: trcfix@gmail.com</p>
+      <p style="color: var(--text-secondary);">💬 Message us anytime and we'll respond within 24 hours!</p>
     </div>
   </section>
 
-  <!-- LOGIN PAGE -->
-  <section class="page-content" id="login-page">
-    <div class="auth-container" id="authBox">
-      <h2>🔐 Login / Register</h2>
-      <input type="text" id="username" placeholder="Username" />
-      <input type="password" id="password" placeholder="Password" />
-      <button onclick="login()">Login</button>
-      <button onclick="register()">Register</button>
-      <p style="margin-top: 15px; color: #94a3b8; font-size: 12px;">First time? Click Register to create an account</p>
-    </div>
-
-    <div class="protected-content" id="protectedContent">
-      <h2>👤 Welcome to Your Dashboard</h2>
-      <p id="userInfo" style="color: #38bdf8; margin: 15px 0;"></p>
-      
-      <div class="features-grid" style="margin: 20px 0;">
-        <div class="feature-box">
-          <h4>📊 Your Services</h4>
-          <p>Access all your purchased services and manage them from here.</p>
-        </div>
-        <div class="feature-box">
-          <h4>💼 Account Settings</h4>
-          <p>Update your profile information and preferences.</p>
-        </div>
-        <div class="feature-box">
-          <h4>📞 Support Center</h4>
-          <p>Get help from our support team whenever you need it.</p>
-        </div>
-      </div>
-
-      <button onclick="logout()" style="padding: 10px 20px; background: #ef4444; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">Logout</button>
-      
-      <p style="margin-top: 30px; font-size: 12px; color: #64748b;">POWERED BY MR TRC TECH</p>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
   <footer>
-    <h2 style="border: none; margin: 0 0 20px 0; padding: 0; text-align: center;">🚀 TRC TECH - FUTURE OF AUTOMATION</h2>
-    
-    <div style="max-width: 1000px; margin: 0 auto;">
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0;">
-        <div>
-          <h4 style="color: #0ea5e9; margin-bottom: 10px;">Quick Links</h4>
-          <p style="font-size: 12px;"><a href="#home" onclick="navigateTo('home'); return false;" style="color: #0ea5e9; text-decoration: none;">Home</a></p>
-          <p style="font-size: 12px;"><a href="#services" onclick="navigateTo('services'); return false;" style="color: #0ea5e9; text-decoration: none;">Services</a></p>
-          <p style="font-size: 12px;"><a href="#pricing" onclick="navigateTo('pricing'); return false;" style="color: #0ea5e9; text-decoration: none;">Pricing</a></p>
-          <p style="font-size: 12px;"><a href="#contact" onclick="navigateTo('contact'); return false;" style="color: #0ea5e9; text-decoration: none;">Contact</a></p>
-        </div>
-
-        <div>
-          <h4 style="color: #0ea5e9; margin-bottom: 10px;">Support</h4>
-          <p style="font-size: 12px;"><a href="https://wa.me/260763926311" target="_blank" style="color: #0ea5e9; text-decoration: none;">WhatsApp Support</a></p>
-          <p style="font-size: 12px;"><a href="mailto:trcesfix@gmail.com" style="color: #0ea5e9; text-decoration: none;">Email Support</a></p>
-          <p style="font-size: 12px;"><a href="#faq" onclick="navigateTo('faq'); return false;" style="color: #0ea5e9; text-decoration: none;">FAQ</a></p>
-          <p style="font-size: 12px;"><a href="#contact" onclick="navigateTo('contact'); return false;" style="color: #0ea5e9; text-decoration: none;">Contact</a></p>
-        </div>
-
-        <div>
-          <h4 style="color: #0ea5e9; margin-bottom: 10px;">Social Media</h4>
-          <p style="font-size: 12px;"><a href="https://wa.me/260763926311" target="_blank" style="color: #0ea5e9; text-decoration: none;">💬 WhatsApp</a></p>
-          <p style="font-size: 12px;"><a href="https://tiktok.com/@trctech" target="_blank" style="color: #0ea5e9; text-decoration: none;">🎵 TikTok</a></p>
-          <p style="font-size: 12px;"><a href="https://youtube.com/@trctech" target="_blank" style="color: #0ea5e9; text-decoration: none;">📺 YouTube</a></p>
-          <p style="font-size: 12px;"><a href="https://facebook.com/trctech" target="_blank" style="color: #0ea5e9; text-decoration: none;">👥 Facebook</a></p>
-        </div>
-      </div>
-
-      <hr style="border: none; border-top: 1px solid #1f2937; margin: 20px 0;">
-
-      <p style="margin: 10px 0; font-size: 12px;">💳 PAYMENT ONLY THROUGH MTN AND ZAMTEL</p>
-      <p style="margin: 10px 0; font-size: 11px;">POWERED BY MR TRC TECH AND TRC FIX</p>
-      <p style="margin: 10px 0; font-size: 11px;">© 2026 TRC TECH. All rights reserved.</p>
-      <p style="margin: 10px 0; font-size: 11px;"><a href="#" onclick="alert('Privacy Policy - Coming Soon'); return false;" style="color: #0ea5e9; text-decoration: none;">Privacy Policy</a> | <a href="#" onclick="alert('Terms of Service - Coming Soon'); return false;" style="color: #0ea5e9; text-decoration: none;">Terms of Service</a></p>
-    </div>
+    <p>&copy; 2024 TRC TECH - All rights reserved. Automation & Innovation.</p>
   </footer>
 
-  <!-- THREE.JS CANVAS SCRIPT -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
-  <!-- MAIN SCRIPTS -->
   <script>
-    // Navigation Function
-    function navigateTo(page) {
-      // Hide all pages
-      const pages = document.querySelectorAll('.page-content');
-      pages.forEach(p => p.classList.remove('active'));
-
-      // Show selected page
-      const targetPage = document.getElementById(page + '-page');
-      if (targetPage) {
-        targetPage.classList.add('active');
-        window.scrollTo(0, 0);
+    // Initialize stored data
+    function initializeStorage() {
+      if (!localStorage.getItem('adminStatuses')) {
+        localStorage.setItem('adminStatuses', JSON.stringify([]));
       }
-
-      // Close mobile menu
-      document.getElementById('navLinks').classList.remove('active');
+      if (!localStorage.getItem('currentTheme')) {
+        localStorage.setItem('currentTheme', 'default');
+      }
     }
 
-    // Toggle Mobile Menu
-    function toggleMenu() {
-      document.getElementById('navLinks').classList.toggle('active');
+    // Theme System
+    function changeTheme(themeName) {
+      const body = document.body;
+      const allThemeOptions = document.querySelectorAll('.theme-option');
+      
+      // Remove all theme classes
+      body.classList.remove('theme-purple', 'theme-green', 'theme-pink', 'theme-orange', 'theme-yellow', 'theme-cyan', 'theme-red', 'theme-indigo');
+      
+      // Add new theme class
+      if (themeName !== 'default') {
+        body.classList.add(`theme-${themeName}`);
+      }
+      
+      // Update active theme button
+      allThemeOptions.forEach(option => {
+        option.classList.remove('active');
+        if (option.dataset.theme === themeName) {
+          option.classList.add('active');
+        }
+      });
+      
+      localStorage.setItem('currentTheme', themeName);
+      showThemeNotification(themeName);
     }
 
-    // Navbar Scroll Effect
-    window.addEventListener('scroll', function() {
-      const navbar = document.getElementById('navbar');
-      navbar.classList.toggle('scrolled', window.scrollY > 20);
-    });
+    function showThemeNotification(themeName) {
+      const themeNames = {
+        'default': 'Dark Blue',
+        'purple': 'Purple',
+        'green': 'Cyber Green',
+        'pink': 'Neon Pink',
+        'orange': 'Orange',
+        'yellow': 'Yellow',
+        'cyan': 'Cyan',
+        'red': 'Red',
+        'indigo': 'Indigo'
+      };
+      
+      const msg = document.getElementById('adminMessage');
+      msg.textContent = `✓ Theme changed to ${themeNames[themeName]}`;
+      msg.style.color = 'var(--success-color)';
+      setTimeout(() => { msg.textContent = ''; }, 2000);
+    }
 
-    // Close menu when clicking outside
-    document.addEventListener('click', function(event) {
-      const navbar = document.getElementById('navbar');
-      const navLinks = document.getElementById('navLinks');
-      const menuToggle = document.getElementById('menuToggle');
+    // Settings Panel
+    function toggleSettings() {
+      const panel = document.getElementById('settingsPanel');
+      const overlay = document.getElementById('settingsOverlay');
+      panel.classList.toggle('active');
+      overlay.classList.toggle('active');
+    }
 
-      if (!navbar.contains(event.target) && navLinks.classList.contains('active')) {
-        navLinks.classList.remove('active');
+    document.getElementById('settingsOverlay').addEventListener('click', toggleSettings);
+
+    // Admin Status Update
+    function submitAdminStatus() {
+      const password = document.getElementById('adminPassword').value;
+      const status = document.getElementById('statusUpdate').value;
+      const correctPassword = 'TRCFIX/TECH2026';
+      const msg = document.getElementById('adminMessage');
+      
+      if (!password || !status) {
+        msg.textContent = '❌ Please fill all fields';
+        msg.style.color = '#fca5a5';
+        return;
+      }
+      
+      if (password !== correctPassword) {
+        msg.textContent = '❌ Invalid password';
+        msg.style.color = '#fca5a5';
+        return;
+      }
+      
+      // Update header status
+      const liveStatus = document.getElementById('liveStatus');
+      liveStatus.innerHTML = `<span class="live-status">📢 ${status}</span>`;
+      liveStatus.classList.remove('online', 'busy');
+      
+      // Store status with timestamp
+      let statuses = JSON.parse(localStorage.getItem('adminStatuses') || '[]');
+      statuses.push({
+        message: status,
+        timestamp: new Date(),
+        expiresAt: new Date(Date.now() + 24*60*60*1000) // 24 hours
+      });
+      
+      // Keep only last 5 statuses
+      if (statuses.length > 5) {
+        statuses = statuses.slice(-5);
+      }
+      localStorage.setItem('adminStatuses', JSON.stringify(statuses));
+      
+      msg.textContent = '✓ Status updated successfully!';
+      msg.style.color = 'var(--success-color)';
+      
+      document.getElementById('adminPassword').value = '';
+      document.getElementById('statusUpdate').value = '';
+      
+      setTimeout(() => { msg.textContent = ''; }, 3000);
+    }
+
+    // Show admin panel on key combination (Ctrl + Shift + A)
+    document.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+        document.getElementById('adminStatusPanel').classList.toggle('active');
       }
     });
 
-    // Clock and Status Update
-    function updateClockAndStatus() {
-      const now = new Date();
-      const clockEl = document.getElementById('clock');
-      if (clockEl) clockEl.textContent = now.toLocaleTimeString();
-
-      const hours = now.getHours();
-      const status = document.getElementById('status');
-      if (status) {
-        if (hours >= 8 && hours < 22) {
-          status.textContent = 'ONLINE';
-          status.className = 'status online';
-        } else {
-          status.textContent = 'BUSY';
-          status.className = 'status busy';
+    // Load stored status on page load
+    function loadStoredStatus() {
+      const statuses = JSON.parse(localStorage.getItem('adminStatuses') || '[]');
+      if (statuses.length > 0) {
+        const latestStatus = statuses[statuses.length - 1];
+        const expiresAt = new Date(latestStatus.expiresAt);
+        
+        if (new Date() < expiresAt) {
+          const liveStatus = document.getElementById('liveStatus');
+          liveStatus.innerHTML = `<span class="live-status">📢 ${latestStatus.message}</span>`;
+          liveStatus.classList.remove('online', 'busy');
         }
       }
     }
-    setInterval(updateClockAndStatus, 1000);
-    updateClockAndStatus();
 
-    // Authentication Functions
-    window.onload = function() {
-      let user = localStorage.getItem('trc_logged_user');
-      if (user) {
-        showProtectedContent(user);
-      }
-    };
-
-    function register() {
-      let user = document.getElementById('username').value.trim();
-      let pass = document.getElementById('password').value.trim();
-
-      if (!user || !pass) {
-        alert('Fill all fields');
-        return;
-      }
-
-      if (localStorage.getItem('user_' + user)) {
-        alert('User already exists');
-        return;
-      }
-
-      localStorage.setItem('user_' + user, pass);
-      alert('Registered successfully! Please login.');
-      document.getElementById('username').value = '';
-      document.getElementById('password').value = '';
+    // Load theme on page load
+    function loadSavedTheme() {
+      const savedTheme = localStorage.getItem('currentTheme') || 'default';
+      changeTheme(savedTheme);
     }
 
-    function login() {
-      let user = document.getElementById('username').value.trim();
-      let pass = document.getElementById('password').value.trim();
+    // Navigation
+    function navigateTo(page) {
+      const allPages = document.querySelectorAll('.page-content');
+      allPages.forEach(p => p.classList.remove('active'));
+      
+      const targetPage = document.getElementById(`${page}-page`);
+      if (targetPage) {
+        targetPage.classList.add('active');
+        window.scrollTo(0, 0);
+        
+        const navLinks = document.getElementById('navLinks');
+        if (navLinks.classList.contains('active')) {
+          navLinks.classList.remove('active');
+        }
+      }
+    }
 
-      let storedPass = localStorage.getItem('user_' + user);
+    // Menu Toggle
+    function toggleMenu() {
+      const navLinks = document.getElementById('navLinks');
+      navLinks.classList.toggle('active');
+    }
 
-      if (storedPass === pass) {
-        localStorage.setItem('trc_logged_user', user);
-        showProtectedContent(user);
+    // Clock Update
+    function updateClock() {
+      const clock = document.getElementById('clock');
+      const now = new Date();
+      clock.textContent = now.toLocaleTimeString();
+    }
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
       } else {
-        alert('Invalid username or password');
+        navbar.classList.remove('scrolled');
       }
-    }
+    });
 
-    function showProtectedContent(user) {
-      document.getElementById('authBox').style.display = 'none';
-      document.getElementById('protectedContent').style.display = 'block';
-      document.getElementById('userInfo').innerText = 'Welcome, ' + user + '! 👋';
-    }
-
-    function logout() {
-      localStorage.removeItem('trc_logged_user');
-      document.getElementById('authBox').style.display = 'block';
-      document.getElementById('protectedContent').style.display = 'none';
-      document.getElementById('username').value = '';
-      document.getElementById('password').value = '';
-      alert('Logged out successfully');
-    }
-
-    // THREE.JS Background Animation
-    const canvas = document.getElementById('bg-canvas');
-    if (canvas) {
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-      const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
-
-      function resize() {
-        const width = window.innerWidth;
-        const height = window.innerHeight;
-        renderer.setSize(width, height);
-        camera.aspect = width / height;
-        camera.updateProjectionMatrix();
-      }
-      window.addEventListener('resize', resize);
-      resize();
-
-      const geometry = new THREE.BufferGeometry();
-      const count = 3000;
-      const positions = new Float32Array(count * 3);
-      for (let i = 0; i < count * 3; i++) {
-        positions[i] = (Math.random() - 0.5) * 2000;
-      }
-      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-      const material = new THREE.PointsMaterial({ 
-        color: 0x38bdf8, 
-        size: 2, 
-        transparent: true, 
-        opacity: 0.6 
-      });
-      const particles = new THREE.Points(geometry, material);
-      scene.add(particles);
-      camera.position.z = 1000;
-
-      function animate() {
-        requestAnimationFrame(animate);
-        particles.rotation.y += 0.0003;
-        particles.rotation.x += 0.00015;
-        renderer.render(scene, camera);
-      }
-      animate();
-    }
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', () => {
+      initializeStorage();
+      loadSavedTheme();
+      loadStoredStatus();
+      updateClock();
+      setInterval(updateClock, 1000);
+    });
   </script>
 </body>
 </html>
