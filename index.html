@@ -243,6 +243,28 @@
       border: none;
     }
 
+    .admin-access-btn {
+      display: none;
+      background: none;
+      border: 1px solid var(--primary-color);
+      color: var(--primary-color);
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.3s;
+      margin: 0 5px;
+    }
+
+    .admin-access-btn:hover {
+      background: var(--primary-color);
+      color: #000;
+    }
+
+    .admin-access-btn.mobile-visible {
+      display: inline-block;
+    }
+
     /* SETTINGS PANEL */
     .settings-panel {
       position: fixed;
@@ -361,6 +383,8 @@
       z-index: 1500;
       width: 300px;
       box-shadow: 0 0 20px rgba(14, 165, 233, 0.2);
+      max-height: 90vh;
+      overflow-y: auto;
     }
 
     .admin-status-panel.active {
@@ -372,6 +396,18 @@
       font-size: 14px;
       font-weight: 600;
       margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .admin-close-btn {
+      background: none;
+      border: none;
+      color: var(--primary-color);
+      font-size: 18px;
+      cursor: pointer;
+      padding: 0;
     }
 
     .admin-status-input {
@@ -787,6 +823,10 @@
         display: block;
       }
 
+      .admin-access-btn.mobile-visible {
+        display: inline-block;
+      }
+
       .hero-content h1 {
         font-size: 2rem;
       }
@@ -813,6 +853,12 @@
       .settings-panel {
         width: 280px;
         right: -280px;
+      }
+
+      .admin-status-panel {
+        width: 280px;
+        right: 20px;
+        bottom: 20px;
       }
     }
 
@@ -870,7 +916,10 @@
 
   <!-- Admin Status Update Panel -->
   <div class="admin-status-panel" id="adminStatusPanel">
-    <div class="admin-status-header">🔐 ADMIN LIVE STATUS UPDATE</div>
+    <div class="admin-status-header">
+      🔐 ADMIN STATUS
+      <button class="admin-close-btn" onclick="toggleAdminPanel()">✕</button>
+    </div>
     <input type="password" class="admin-password-input" id="adminPassword" placeholder="Admin Password">
     <input type="text" class="admin-status-input" id="statusUpdate" placeholder="Update status message...">
     <button class="admin-button" onclick="submitAdminStatus()">Post Status</button>
@@ -900,6 +949,9 @@
       <a href="#login" onclick="navigateTo('login'); return false;" class="btn login-btn">Login</a>
       <a href="https://wa.me/260763926311" class="btn whatsapp-btn" target="_blank">WhatsApp</a>
     </div>
+
+    <!-- Admin Access Button (Mobile) -->
+    <button class="admin-access-btn mobile-visible" onclick="toggleAdminPanel()" title="Admin Panel">🔐</button>
 
     <button class="menu-toggle" onclick="toggleMenu()" id="menuToggle">☰</button>
   </nav>
@@ -1004,436 +1056,86 @@
         </div>
       </div>
       <div class="card">
-        <h3>📚 Learning</h3>
-        <p>Tech training</p>
-        <p><strong>K50 - K90</strong></p>
+        <h3>🌐 Web Services</h3>
+        <p>Website design & hosting</p>
+        <p><strong>K50 - K200</strong></p>
         <div class="buttons">
-          <a href="https://wa.me/260763926311?text=I%20want%20learning" target="_blank">WhatsApp</a>
-          <a href="sms:260763926311?body=I%20want%20learning">SMS</a>
-          <a href="mailto:trcfix@gmail.com?subject=Learning&body=I%20want%20learning">Gmail</a>
-        </div>
-      </div>
-      <div class="card">
-        <h3>👑 VIP Membership</h3>
-        <p>Exclusive access & priority service</p>
-        <p><strong>K160</strong></p>
-        <div class="buttons">
-          <a href="https://wa.me/260763926311?text=I%20want%20VIP" target="_blank">WhatsApp</a>
-          <a href="sms:260763926311?body=I%20want%20VIP">SMS</a>
-          <a href="mailto:trcfix@gmail.com?subject=VIP&body=I%20want%20VIP">Gmail</a>
-        </div>
-      </div>
-    </div>
-
-    <h2>🔥 PREMIUM SERVICES</h2>
-    <div class="container">
-      <div class="card">
-        <h3>🚀 Advanced WhatsApp Bot</h3>
-        <p><strong>K80 - K110</strong></p>
-        <div class="buttons">
-          <a href="https://wa.me/260763926311?text=Advanced%20Bot" target="_blank">WhatsApp</a>
-        </div>
-      </div>
-      <div class="card">
-        <h3>🌐 Website Development</h3>
-        <p><strong>K90 - K110</strong></p>
-        <div class="buttons">
-          <a href="https://wa.me/260763926311?text=Website" target="_blank">WhatsApp</a>
+          <a href="https://wa.me/260763926311?text=I%20want%20web%20services" target="_blank">WhatsApp</a>
+          <a href="sms:260763926311?body=I%20want%20web%20services">SMS</a>
+          <a href="mailto:trcfix@gmail.com?subject=Web&body=I%20want%20web%20services">Gmail</a>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- ELITE SERVICES PAGE -->
-  <section class="page-content" id="elite-page">
-    <h2>💼 TRC ELITE SERVICES (FOR PROFESSIONAL CLIENTS)</h2>
-    <div class="container">
-      <div class="card">
-        <h3>🤖 AI Business Automation System</h3>
-        <p>Full smart automation for WhatsApp & business chats</p>
-        <p><strong>K65 - K120</strong></p>
-        <div class="buttons">
-          <a href="https://wa.me/260763926311?text=I%20want%20AI%20Business%20Automation" target="_blank">WhatsApp</a>
-          <a href="sms:260763926311?body=I%20want%20AI%20Business%20Automation">SMS</a>
-          <a href="mailto:trcesfix@gmail.com?subject=AI%20Automation&body=I%20want%20AI%20Business%20Automation">Gmail</a>
-        </div>
-      </div>
-      <div class="card">
-        <h3>🌐 Full Website + Hosting Setup</h3>
-        <p>Design, deploy, mobile optimization & contact system</p>
-        <p><strong>K60 - K180</strong></p>
-        <div class="buttons">
-          <a href="https://wa.me/260763926311?text=I%20want%20a%20full%20website" target="_blank">WhatsApp</a>
-          <a href="sms:260763926311?body=I%20want%20a%20full%20website">SMS</a>
-          <a href="mailto:trcesfix@gmail.com?subject=Website&body=I%20want%20a%20full%20website">Gmail</a>
-        </div>
-      </div>
-      <div class="card">
-        <h3>🧬 Custom Bot Development</h3>
-        <p>Advanced personalized bots with commands & automation</p>
-        <p><strong>K45 - K100</strong></p>
-        <div class="buttons">
-          <a href="https://wa.me/260763926311?text=I%20want%20custom%20bot" target="_blank">WhatsApp</a>
-          <a href="sms:260763926311?body=I%20want%20custom%20bot">SMS</a>
-          <a href="mailto:trcesfix@gmail.com?subject=Custom%20Bot&body=I%20want%20custom%20bot">Gmail</a>
-        </div>
-      </div>
-      <div class="card">
-        <h3>🔐 Advanced Cyber Security Setup</h3>
-        <p>Full device & account protection system</p>
-        <p><strong>K50 - K100</strong></p>
-        <div class="buttons">
-          <a href="https://wa.me/260763926311?text=I%20want%20security%20setup" target="_blank">WhatsApp</a>
-          <a href="sms:260763926311?body=I%20want%20security%20setup">SMS</a>
-          <a href="mailto:trcesfix@gmail.com?subject=Security&body=I%20want%20security%20setup">Gmail</a>
-        </div>
-      </div>
-      <div class="card">
-        <h3>📊 Business Digital Setup Package</h3>
-        <p>Full online business system setup (WA + FB + Gmail)</p>
-        <p><strong>K50 - K160</strong></p>
-        <div class="buttons">
-          <a href="https://wa.me/260763926311?text=I%20want%20business%20setup" target="_blank">WhatsApp</a>
-          <a href="sms:260763926311?body=I%20want%20business%20setup">SMS</a>
-          <a href="mailto:trcesfix@gmail.com?subject=Business%20Setup&body=I%20want%20business%20setup">Gmail</a>
-        </div>
-      </div>
-      <div class="card">
-        <h3>🎯 Social Media Automation System</h3>
-        <p>Auto posting, growth tools & engagement system</p>
-        <p><strong>K40 - K75</strong></p>
-        <div class="buttons">
-          <a href="https://wa.me/260763926311?text=I%20want%20social%20automation" target="_blank">WhatsApp</a>
-          <a href="sms:260763926311?body=I%20want%20social%20automation">SMS</a>
-          <a href="mailto:trcesfix@gmail.com?subject=Social%20Automation&body=I%20want%20social%20automation">Gmail</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRICING PAGE -->
-  <section class="page-content" id="pricing-page">
-    <h2>💰 PRICING PLANS</h2>
-    <div class="container">
-      <div class="card">
-        <h3>🎯 Starter Package</h3>
-        <p>Perfect for beginners</p>
-        <p><strong>K10 - K30</strong></p>
-        <ul style="text-align: left; margin: 15px 0; color: #94a3b8;">
-          <li>✓ Basic Bot Setup</li>
-          <li>✓ 1 Service</li>
-          <li>✓ Email Support</li>
-        </ul>
-        <div class="buttons">
-          <a href="https://wa.me/260763926311?text=I%20want%20starter%20package" target="_blank">Get Started</a>
-        </div>
-      </div>
-      <div class="card">
-        <h3>⭐ Professional Package</h3>
-        <p>For growing businesses</p>
-        <p><strong>K40 - K100</strong></p>
-        <ul style="text-align: left; margin: 15px 0; color: #94a3b8;">
-          <li>✓ Advanced Bot</li>
-          <li>✓ 5 Services</li>
-          <li>✓ Priority Support</li>
-          <li>✓ Custom Features</li>
-        </ul>
-        <div class="buttons">
-          <a href="https://wa.me/260763926311?text=I%20want%20professional%20package" target="_blank">Get Started</a>
-        </div>
-      </div>
-      <div class="card">
-        <h3>👑 Enterprise Package</h3>
-        <p>Full suite solution</p>
-        <p><strong>K120 - K300</strong></p>
-        <ul style="text-align: left; margin: 15px 0; color: #94a3b8;">
-          <li>✓ Full Automation</li>
-          <li>✓ Unlimited Services</li>
-          <li>✓ 24/7 Dedicated Support</li>
-          <li>✓ Custom Solutions</li>
-          <li>✓ Analytics Dashboard</li>
-        </ul>
-        <div class="buttons">
-          <a href="https://wa.me/260763926311?text=I%20want%20enterprise%20package" target="_blank">Get Started</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FEATURES PAGE -->
-  <section class="page-content" id="features-page">
-    <h2>✨ OUR FEATURES</h2>
-    <div class="features-grid">
-      <div class="feature-box">
-        <h4>⚡ Lightning Fast</h4>
-        <p>Ultra-fast processing and delivery of all services. No delays, maximum efficiency.</p>
-      </div>
-      <div class="feature-box">
-        <h4>🔒 Secure & Safe</h4>
-        <p>Enterprise-grade security with data encryption and protection protocols.</p>
-      </div>
-      <div class="feature-box">
-        <h4>🎯 Customizable</h4>
-        <p>Fully customizable solutions tailored to your specific needs and requirements.</p>
-      </div>
-      <div class="feature-box">
-        <h4>📱 Mobile Friendly</h4>
-        <p>Responsive design that works perfectly on all devices and screen sizes.</p>
-      </div>
-      <div class="feature-box">
-        <h4>🌍 Global Support</h4>
-        <p>Support available across multiple time zones with multilingual assistance.</p>
-      </div>
-      <div class="feature-box">
-        <h4>💡 AI Powered</h4>
-        <p>Advanced AI technology for smarter automation and intelligent solutions.</p>
-      </div>
-      <div class="feature-box">
-        <h4>📊 Analytics</h4>
-        <p>Detailed reports and analytics to track your progress and ROI.</p>
-      </div>
-      <div class="feature-box">
-        <h4>🚀 Scalable</h4>
-        <p>Grows with your business. Scale up easily as your needs expand.</p>
-      </div>
-      <div class="feature-box">
-        <h4>🎓 Training</h4>
-        <p>Free training and documentation to help you maximize our services.</p>
-      </div>
-      <div class="feature-box">
-        <h4>🔄 Regular Updates</h4>
-        <p>Continuous improvements and new features added regularly.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ABOUT PAGE -->
-  <section class="page-content" id="about-page">
-    <h2>ℹ️ ABOUT TRC TECH</h2>
-    <div class="container">
-      <div class="card">
-        <h3>🎯 Our Mission</h3>
-        <p>To provide cutting-edge technology solutions that empower businesses and individuals to automate their operations and achieve their goals efficiently.</p>
-      </div>
-      <div class="card">
-        <h3>🚀 Our Vision</h3>
-        <p>To be the leading technology service provider in the region, known for innovation, reliability, and exceptional customer service.</p>
-      </div>
-      <div class="card">
-        <h3>💪 Our Values</h3>
-        <p>Excellence, Integrity, Innovation, Customer Focus, and Community Commitment drive everything we do.</p>
-      </div>
-    </div>
-
-    <h2>👥 TEAM HIGHLIGHTS</h2>
-    <div class="features-grid">
-      <div class="feature-box">
-        <h4>MR TRC</h4>
-        <p>Founder & Lead Developer - Visionary leader with 10+ years in tech automation.</p>
-      </div>
-      <div class="feature-box">
-        <h4>Expert Support Team</h4>
-        <p>Dedicated professionals ready to assist 24/7 with any technical issues.</p>
-      </div>
-      <div class="feature-box">
-        <h4>Innovation Lab</h4>
-        <p>Constantly developing new features and solutions for our clients.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- PORTFOLIO PAGE -->
-  <section class="page-content" id="portfolio-page">
-    <h2>🎨 PORTFOLIO & PAST PROJECTS</h2>
-    <div class="container">
-      <div class="card">
-        <h3>E-Commerce Bot Solution</h3>
-        <p>Automated WhatsApp bot for online store with inventory management.</p>
-        <p><strong>Client: Online Retail Store</strong></p>
-        <p style="color: #86efac;">✓ 300% increase in customer engagement</p>
-      </div>
-      <div class="card">
-        <h3>Healthcare Automation System</h3>
-        <p>Complete digital system for clinic appointment booking and reminders.</p>
-        <p><strong>Client: Medical Clinic</strong></p>
-        <p style="color: #86efac;">✓ 80% reduction in missed appointments</p>
-      </div>
-      <div class="card">
-        <h3>Real Estate Management Platform</h3>
-        <p>Web-based system for property listing and client management.</p>
-        <p><strong>Client: Real Estate Agency</strong></p>
-        <p style="color: #86efac;">✓ 50% faster property inquiries</p>
-      </div>
-      <div class="card">
-        <h3>Educational Bot Platform</h3>
-        <p>Interactive bot for student assignments and course management.</p>
-        <p><strong>Client: Training Center</strong></p>
-        <p style="color: #86efac;">✓ 90% student satisfaction rate</p>
-      </div>
-      <div class="card">
-        <h3>Restaurant Management System</h3>
-        <p>Order automation and delivery tracking system.</p>
-        <p><strong>Client: Restaurant Chain</strong></p>
-        <p style="color: #86efac;">✓ 40% increase in orders</p>
-      </div>
-      <div class="card">
-        <h3>Gaming Community Bot</h3>
-        <p>Discord/WhatsApp bot for gaming tournaments and leaderboards.</p>
-        <p><strong>Client: Gaming Community</strong></p>
-        <p style="color: #86efac;">✓ 5000+ active members</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- TESTIMONIALS PAGE -->
-  <section class="page-content" id="testimonials-page">
-    <h2>⭐ CLIENT TESTIMONIALS</h2>
-    <div class="testimonial">
-      <p>"TRC TECH transformed our business. The automation they implemented saved us hours daily. Highly recommended!"</p>
-      <p class="testimonial-author">- John Mwale, E-Commerce Owner</p>
-    </div>
-    <div class="testimonial">
-      <p>"Exceptional service and support. The team is professional and always ready to help. Worth every penny!"</p>
-      <p class="testimonial-author">- Sarah Banda, Marketing Manager</p>
-    </div>
-    <div class="testimonial">
-      <p>"Best investment for our clinic. Patient management is now seamless. Thank you TRC TECH!"</p>
-      <p class="testimonial-author">- Dr. Mutale, Healthcare Provider</p>
-    </div>
-    <div class="testimonial">
-      <p>"The bot they created increased our sales by 300%. Incredible work and support!"</p>
-      <p class="testimonial-author">- Chileshe Mubanga, Business Owner</p>
-    </div>
-    <div class="testimonial">
-      <p>"Professional, reliable, and innovative. TRC TECH is the go-to solution for automation."</p>
-      <p class="testimonial-author">- Kaonga Phiri, Tech Director</p>
-    </div>
-  </section>
-
-  <!-- FAQ PAGE -->
-  <section class="page-content" id="faq-page">
-    <h2>❓ FREQUENTLY ASKED QUESTIONS</h2>
-    <div class="container">
-      <div class="card">
-        <h3>How quickly can you set up a bot?</h3>
-        <p>Most basic bots can be set up within 24-48 hours. Complex solutions take 3-7 days depending on requirements.</p>
-      </div>
-      <div class="card">
-        <h3>What payment methods do you accept?</h3>
-        <p>We accept MTN and ZAMTEL mobile money payments. Payment only through MTN and ZAMTEL.</p>
-      </div>
-      <div class="card">
-        <h3>Do you provide after-sales support?</h3>
-        <p>Yes! We offer 24/7 support to all our clients. Your satisfaction is our priority.</p>
-      </div>
-      <div class="card">
-        <h3>Can I upgrade my package later?</h3>
-        <p>Absolutely! You can upgrade to a higher package anytime. No hidden fees or penalties.</p>
-      </div>
-      <div class="card">
-        <h3>Is there a money-back guarantee?</h3>
-        <p>If you're not satisfied within 14 days, we'll refund your money. No questions asked.</p>
-      </div>
-      <div class="card">
-        <h3>Do you offer custom solutions?</h3>
-        <p>Yes! We specialize in custom solutions tailored to your specific needs and budget.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- BLOG PAGE -->
-  <section class="page-content" id="blog-page">
-    <h2>📝 LATEST BLOG POSTS</h2>
-    <div class="container">
-      <div class="card">
-        <h3>Getting Started with WhatsApp Automation</h3>
-        <p>Learn how to set up your first bot and automate your business communication...</p>
-        <p><strong>Posted: March 2024</strong></p>
-      </div>
-      <div class="card">
-        <h3>10 Ways AI Can Transform Your Business</h3>
-        <p>Discover how artificial intelligence is revolutionizing business operations...</p>
-        <p><strong>Posted: March 2024</strong></p>
-      </div>
-      <div class="card">
-        <h3>Cybersecurity Tips for Small Businesses</h3>
-        <p>Protect your business from cyber threats with these essential security tips...</p>
-        <p><strong>Posted: March 2024</strong></p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT PAGE -->
-  <section class="page-content" id="contact-page">
-    <h2>📞 CONTACT US</h2>
-    <div class="auth-container">
-      <h3 style="color: var(--text-primary); margin-bottom: 20px;">Get in Touch</h3>
-      <p style="color: var(--text-secondary); margin-bottom: 20px;">📱 WhatsApp: +260 763 926 311</p>
-      <p style="color: var(--text-secondary); margin-bottom: 20px;">📧 Email: trcfix@gmail.com</p>
-      <p style="color: var(--text-secondary);">💬 Message us anytime and we'll respond within 24 hours!</p>
-    </div>
-  </section>
-
-  <footer>
-    <p>&copy; 2024 TRC TECH - All rights reserved. Automation & Innovation.</p>
-  </footer>
 
   <script>
-    // Initialize stored data
-    function initializeStorage() {
-      if (!localStorage.getItem('adminStatuses')) {
-        localStorage.setItem('adminStatuses', JSON.stringify([]));
-      }
-      if (!localStorage.getItem('currentTheme')) {
-        localStorage.setItem('currentTheme', 'default');
+    // Admin Password (Change this to your secure password)
+    const ADMIN_PASSWORD = 'TRC2024';
+
+    function toggleAdminPanel() {
+      const panel = document.getElementById('adminStatusPanel');
+      panel.classList.toggle('active');
+      if (panel.classList.contains('active')) {
+        document.getElementById('adminPassword').focus();
       }
     }
 
-    // Theme System
-    function changeTheme(themeName) {
-      const body = document.body;
-      const allThemeOptions = document.querySelectorAll('.theme-option');
-      
-      // Remove all theme classes
-      body.classList.remove('theme-purple', 'theme-green', 'theme-pink', 'theme-orange', 'theme-yellow', 'theme-cyan', 'theme-red', 'theme-indigo');
-      
-      // Add new theme class
-      if (themeName !== 'default') {
-        body.classList.add(`theme-${themeName}`);
+    function submitAdminStatus() {
+      const password = document.getElementById('adminPassword').value;
+      const status = document.getElementById('statusUpdate').value;
+      const messageDiv = document.getElementById('adminMessage');
+
+      // Check password
+      if (password !== ADMIN_PASSWORD) {
+        messageDiv.textContent = '❌ Incorrect password';
+        messageDiv.style.color = '#fca5a5';
+        return;
       }
-      
-      // Update active theme button
-      allThemeOptions.forEach(option => {
-        option.classList.remove('active');
-        if (option.dataset.theme === themeName) {
-          option.classList.add('active');
-        }
-      });
-      
-      localStorage.setItem('currentTheme', themeName);
-      showThemeNotification(themeName);
+
+      // Validate status message
+      if (!status.trim()) {
+        messageDiv.textContent = '⚠️ Please enter a status message';
+        messageDiv.style.color = '#fbbf24';
+        return;
+      }
+
+      // Update the live status display
+      const liveStatusElement = document.getElementById('liveStatus');
+      liveStatusElement.textContent = status;
+      liveStatusElement.classList.remove('online', 'busy');
+      liveStatusElement.classList.add('live-status');
+
+      // Success message
+      messageDiv.textContent = '✅ Status updated successfully!';
+      messageDiv.style.color = '#86efac';
+
+      // Clear inputs
+      document.getElementById('adminPassword').value = '';
+      document.getElementById('statusUpdate').value = '';
+
+      // Close panel after 2 seconds
+      setTimeout(() => {
+        toggleAdminPanel();
+        messageDiv.textContent = '';
+      }, 2000);
+
+      // Optional: Log status update (for your records)
+      console.log(`Status updated: ${status} at ${new Date().toLocaleTimeString()}`);
     }
 
-    function showThemeNotification(themeName) {
-      const themeNames = {
-        'default': 'Dark Blue',
-        'purple': 'Purple',
-        'green': 'Cyber Green',
-        'pink': 'Neon Pink',
-        'orange': 'Orange',
-        'yellow': 'Yellow',
-        'cyan': 'Cyan',
-        'red': 'Red',
-        'indigo': 'Indigo'
-      };
-      
-      const msg = document.getElementById('adminMessage');
-      msg.textContent = `✓ Theme changed to ${themeNames[themeName]}`;
-      msg.style.color = 'var(--success-color)';
-      setTimeout(() => { msg.textContent = ''; }, 2000);
-    }
+    // Allow Enter key to submit
+    document.addEventListener('DOMContentLoaded', function() {
+      const statusInput = document.getElementById('statusUpdate');
+      if (statusInput) {
+        statusInput.addEventListener('keypress', function(e) {
+          if (e.key === 'Enter') {
+            submitAdminStatus();
+          }
+        });
+      }
+    });
 
-    // Settings Panel
+    // Original functions (keep existing code)
     function toggleSettings() {
       const panel = document.getElementById('settingsPanel');
       const overlay = document.getElementById('settingsOverlay');
@@ -1441,130 +1143,57 @@
       overlay.classList.toggle('active');
     }
 
-    document.getElementById('settingsOverlay').addEventListener('click', toggleSettings);
-
-    // Admin Status Update
-    function submitAdminStatus() {
-      const password = document.getElementById('adminPassword').value;
-      const status = document.getElementById('statusUpdate').value;
-      const correctPassword = 'TRCFIX/TECH2026';
-      const msg = document.getElementById('adminMessage');
-      
-      if (!password || !status) {
-        msg.textContent = '❌ Please fill all fields';
-        msg.style.color = '#fca5a5';
-        return;
+    function changeTheme(theme) {
+      const body = document.body;
+      body.className = '';
+      if (theme !== 'default') {
+        body.classList.add(`theme-${theme}`);
       }
+      localStorage.setItem('theme', theme);
       
-      if (password !== correctPassword) {
-        msg.textContent = '❌ Invalid password';
-        msg.style.color = '#fca5a5';
-        return;
-      }
-      
-      // Update header status
-      const liveStatus = document.getElementById('liveStatus');
-      liveStatus.innerHTML = `<span class="live-status">📢 ${status}</span>`;
-      liveStatus.classList.remove('online', 'busy');
-      
-      // Store status with timestamp
-      let statuses = JSON.parse(localStorage.getItem('adminStatuses') || '[]');
-      statuses.push({
-        message: status,
-        timestamp: new Date(),
-        expiresAt: new Date(Date.now() + 24*60*60*1000) // 24 hours
+      // Update active theme option
+      document.querySelectorAll('.theme-option').forEach(option => {
+        option.classList.remove('active');
       });
-      
-      // Keep only last 5 statuses
-      if (statuses.length > 5) {
-        statuses = statuses.slice(-5);
-      }
-      localStorage.setItem('adminStatuses', JSON.stringify(statuses));
-      
-      msg.textContent = '✓ Status updated successfully!';
-      msg.style.color = 'var(--success-color)';
-      
-      document.getElementById('adminPassword').value = '';
-      document.getElementById('statusUpdate').value = '';
-      
-      setTimeout(() => { msg.textContent = ''; }, 3000);
+      document.querySelector(`[data-theme="${theme}"]`).classList.add('active');
     }
 
-    // Show admin panel on key combination (Ctrl + Shift + A)
-    document.addEventListener('keydown', (e) => {
-      if (e.ctrlKey && e.shiftKey && e.key === 'A') {
-        document.getElementById('adminStatusPanel').classList.toggle('active');
-      }
-    });
-
-    // Load stored status on page load
-    function loadStoredStatus() {
-      const statuses = JSON.parse(localStorage.getItem('adminStatuses') || '[]');
-      if (statuses.length > 0) {
-        const latestStatus = statuses[statuses.length - 1];
-        const expiresAt = new Date(latestStatus.expiresAt);
-        
-        if (new Date() < expiresAt) {
-          const liveStatus = document.getElementById('liveStatus');
-          liveStatus.innerHTML = `<span class="live-status">📢 ${latestStatus.message}</span>`;
-          liveStatus.classList.remove('online', 'busy');
-        }
-      }
-    }
-
-    // Load theme on page load
-    function loadSavedTheme() {
-      const savedTheme = localStorage.getItem('currentTheme') || 'default';
-      changeTheme(savedTheme);
-    }
-
-    // Navigation
-    function navigateTo(page) {
-      const allPages = document.querySelectorAll('.page-content');
-      allPages.forEach(p => p.classList.remove('active'));
-      
-      const targetPage = document.getElementById(`${page}-page`);
-      if (targetPage) {
-        targetPage.classList.add('active');
-        window.scrollTo(0, 0);
-        
-        const navLinks = document.getElementById('navLinks');
-        if (navLinks.classList.contains('active')) {
-          navLinks.classList.remove('active');
-        }
-      }
-    }
-
-    // Menu Toggle
     function toggleMenu() {
       const navLinks = document.getElementById('navLinks');
       navLinks.classList.toggle('active');
     }
 
-    // Clock Update
-    function updateClock() {
-      const clock = document.getElementById('clock');
-      const now = new Date();
-      clock.textContent = now.toLocaleTimeString();
+    function navigateTo(page) {
+      document.querySelectorAll('.page-content').forEach(section => {
+        section.classList.remove('active');
+      });
+      document.getElementById(`${page}-page`).classList.add('active');
+      window.scrollTo(0, 0);
+      navLinks.classList.remove('active');
     }
 
+    // Load saved theme on page load
+    window.addEventListener('load', function() {
+      const savedTheme = localStorage.getItem('theme') || 'default';
+      changeTheme(savedTheme);
+    });
+
+    // Update clock
+    function updateClock() {
+      const now = new Date();
+      document.getElementById('clock').textContent = now.toLocaleTimeString();
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
     // Navbar scroll effect
-    window.addEventListener('scroll', () => {
+    window.addEventListener('scroll', function() {
       const navbar = document.getElementById('navbar');
       if (window.scrollY > 50) {
         navbar.classList.add('scrolled');
       } else {
         navbar.classList.remove('scrolled');
       }
-    });
-
-    // Initialize on load
-    document.addEventListener('DOMContentLoaded', () => {
-      initializeStorage();
-      loadSavedTheme();
-      loadStoredStatus();
-      updateClock();
-      setInterval(updateClock, 1000);
     });
   </script>
 </body>
